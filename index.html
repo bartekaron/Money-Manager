@@ -2,42 +2,84 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Az enyém</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Money Manager</title>
+
+    <link rel="stylesheet" href="Assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Assets/css/moneymanager.css">
 </head>
 <body>
+
     <div class="container">
+        <header>
+           Money Manager
+        </header>
+
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Money Manager</a>
+              <a class="navbar-brand" href="#">Menü</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Főoldal</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Adatfelvitel</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Táblázat</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Grafikon</a>
-                  </li>
+                
+                <!-- kijelentkezve -->
+                <ul class="navbar-nav" id="loggedOutMenu">
+                    <li class="nav-item">
+                        <a class="nav-link"  href="#" onclick="render('login')">Belépés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="render('register')">Regisztráció</a>
+                    </li>
+                </ul>
+
+                <!-- bejelentkezve -->
+                <ul class="navbar-nav d-none" id="loggedInMenu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="render('newdata'); getToday();">Adatrögzítés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="render('table'); renderData();">Táblázat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="render('calendar'); showCalendar()">Naptár</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="render('chart'); showChart();">Grafikon</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout()">Kilépés</a>
+                    </li>     
                 </ul>
               </div>
             </div>
-          </nav>
+        </nav>
 
-        
-    </div>
-    
+        <main>
+           <!-- ide kerül mindig az aktuális tartalom --> 
+        </main>
+
+        <footer>
+            Bartek Áron- 12.A Szoftverfejlesztő
+        </footer>
+    </div>    
+
+    <script src="Assets/js/bootstrap.bundle.min.js"></script>
+    <script src="Assets/js/fullcalendar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="Assets/js/axios.min.js"></script>
+    <script src="Assets/js/moneymanager.js"></script>
+
+    <!-- Controllers -->
+    <script src="Controllers/register.js"></script>
+    <script src="Controllers/login.js"></script>
+    <script src="Controllers/newdata.js"></script>
+    <script src="Controllers/table.js"></script>
+    <script src="Controllers/calendar.js"></script>
+    <script src="Controllers/chart.js"></script>
+
+
+
+
 </body>
-<script src="js/axios.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
 </html>
