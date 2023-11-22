@@ -1,18 +1,35 @@
+let type = document.querySelector('#type');
+
+
 
 function showCalendar(){
     let myEvents = [];
     axios.get(`${serverURL}/items/userID/eq/${loggedUser.ID}`).then(res=>{
         res.data.forEach(item => {
-            myEvents.push({
-                title: item.amount,
-                start: item.date,
-                allDay: true,
-
-                backgroundColor: '#336c56',
-                borderColor: '#336c56',
-            })
+            if(item.type == "kiadás"){
+                myEvents.push({
+                    title: item.amount +" "+ item.tag,
+                    start: item.date,
+                    allDay: true,
+                    backgroundColor: '#ff0000',
+                    borderColor: '#336c56'
+                })
+            }
+            else{
+                myEvents.push({
+                    title: item.amount +" "+ item.tag,
+                    start: item.date,
+                    allDay: true,
+                    backgroundColor: '#336c56',
+                    borderColor: '#336c56'
+                })
+            }
+            
         });
     });
+    
+    
+    
 
     setTimeout(()=>{
 
@@ -24,6 +41,7 @@ function showCalendar(){
             center: 'title',
             right: 'dayGridMonth,dayGridWeek,dayGridDay,listWeek'
         },
+        
         initialDate: new Date(),
         navLinks: true, // can click day/week names to navigate views
         editable: false,

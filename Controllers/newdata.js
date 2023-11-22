@@ -29,7 +29,7 @@ function addPrice(){
                     return;
                 }
             });
-            if(type.value == "Kiadás"){
+            if(type.value.toLowerCase() == "kiadás"){
                 price.value = -price.value;
             }
 
@@ -53,7 +53,7 @@ function addPrice(){
                 let data = {
                     userID : loggedUser.ID,	
                     date : date.value,
-                    type: type.value,	
+                    type: type.value.toLowerCase(),	
                     amount : price.value,
                     tag : tag.value	
                 }

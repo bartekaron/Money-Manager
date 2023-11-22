@@ -1,13 +1,20 @@
 
 function showChart(){
     let labels = [];
-    let datas = [];
+    let IncomeDatas = [];
+    let IssuenceDatas = [];
 
   axios.get(`${serverURL}/items/userID/eq/${loggedUser.ID}`).then((res) => {
     res.data.sort((a,b) => a.date.localeCompare(b.date));
     res.data.forEach((item) => {
       labels.push(item.date.toString().split("T")[0]);
-      datas.push(item.price);
+      
+      if(item.type.toLowerCase() == "bevétel"){
+        IncomeDatas.push({x: item.date.toString().split("T")[0], y: item.amount})
+        
+      }
+      IssuenceDatas.push({x: item.date.toString().split("T")[0], y: item.amount})
+      //datas.push(item.amount);
     });
   });
 
@@ -20,17 +27,27 @@ function showChart(){
         labels: labels,
         datasets: [
           {
-            label: "Összeg:",
-            data: datas,
+            label: "Bevétel:",
+            data: IncomeDatas,
             borderWidth: 3,
           },
+
+          {
+            label: "Kiadás",
+            data: IssuenceDatas,
+            borderWidth: 3,
+          }
         ],
       },
       options: {
+        responsive: true,
         scales: {
-          y: {
-            beginAtZero: true,
+          x: {
+            stacked: true,
           },
+          y: {
+            stacked: false
+          }
         },
       },
     });
