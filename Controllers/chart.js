@@ -11,9 +11,14 @@ function showChart(){
       
       if(item.type.toLowerCase() == "bevétel"){
         IncomeDatas.push({x: item.date.toString().split("T")[0], y: item.amount})
+        IssuenceDatas.push({x: item.date.toString().split("T")[0], y: 0})
         
       }
-      IssuenceDatas.push({x: item.date.toString().split("T")[0], y: item.amount})
+      else{
+        IssuenceDatas.push({x: item.date.toString().split("T")[0], y: item.amount})
+        IncomeDatas.push({x: item.date.toString().split("T")[0], y: 0})
+      }
+      
       //datas.push(item.amount);
     });
   });
